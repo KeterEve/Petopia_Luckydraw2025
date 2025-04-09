@@ -27,23 +27,7 @@
       border-radius: 50%;
       border: 10px solid #fff;
       box-shadow: 0 0 30px #ffb6b9;
-      background: conic-gradient(
-        #f9f871 0deg 24deg,
-        #ffb6b9 24deg 48deg,
-        #c1fba4 48deg 72deg,
-        #f9f871 72deg 96deg,
-        #ffb6b9 96deg 120deg,
-        #c1fba4 120deg 144deg,
-        #f9f871 144deg 168deg,
-        #ffb6b9 168deg 192deg,
-        #c1fba4 192deg 216deg,
-        #f9f871 216deg 240deg,
-        #ffb6b9 240deg 264deg,
-        #c1fba4 264deg 288deg,
-        #f9f871 288deg 312deg,
-        #ffb6b9 312deg 336deg,
-        #c1fba4 336deg 360deg
-      );
+      background: #eee;
       position: relative;
     }
     #wheel::after {
@@ -95,33 +79,23 @@
   <div id="result"></div>
 
   <script>
-    const names = [
-      "A", "A", "A", "A", "A", "A",
-      "B",
-      "C", "C", "C",
-      "D", "D", "D", "D", "D",
-      "E", "E",
-      "F",
-      "G",
-      "H", "H", "H", "H", "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N", "N", "N", "N", "N", "N", "N",
-      "O"
-    ];
-
     const canvas = document.getElementById("wheel");
     const ctx = canvas.getContext("2d");
     const spinBtn = document.getElementById("spin");
     const resultEl = document.getElementById("result");
 
-    const total = names.length;
-    const slice = 2 * Math.PI / total;
+    let names = [];
+
+    async function fetchNames() {
+      const res = await fetch("https://script.google.com/a/macros/petopia-official.com/s/AKfycbz7PhS2g7eu8s0payoUaD-UFO6YB0ImBdE7LuSFcmOSvBFTIgYC0ivO_f4JWBK0C_7W/exec");
+      names = await res.json();
+      drawWheel();
+    }
 
     function drawWheel() {
+      const total = names.length;
+      const slice = 2 * Math.PI / total;
+      ctx.clearRect(0, 0, 400, 400);
       for (let i = 0; i < total; i++) {
         ctx.beginPath();
         ctx.fillStyle = i % 3 === 0 ? "#f9f871" : i % 3 === 1 ? "#ffb6b9" : "#c1fba4";
@@ -140,9 +114,9 @@
       }
     }
 
-    drawWheel();
-
     function spinWheel() {
+      const total = names.length;
+      const slice = 2 * Math.PI / total;
       const rand = Math.floor(Math.random() * total);
       const angle = (3 * Math.PI / 2) - (rand * slice);
 
@@ -159,6 +133,8 @@
       canvas.style.transform = "rotate(0deg)";
       setTimeout(spinWheel, 100);
     });
+
+    fetchNames();
   </script>
 </body>
 </html>
