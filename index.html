@@ -102,7 +102,7 @@
     let winnersPerGift = { Gift1: 1, Gift2: 1, Gift3: 3 };
 
     async function fetchNames() {
-      const res = await fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjpLcQBWEB4c1bpkO35613VFzoDJErZlRcQ1wOTdlnbhKpm-ukZrxiuVOrHe5kP5VwzLGdkijdKDOpkyXh41kKJEg4zRKcUToboqJs4RHI45EAGYy-aYpo3BbyLXG5YPm_m1HnqB0wZW1t2Fkk59BqwpZU3nBzKej_jeXAj35PRgVjSwzuee0BTz15hzfK72_YA_g-lsgUyPpaUpcjlyiJDJjKwBWpzFB3LSG7naw11UQhHp3E6rUrnLW_tQdAeLzKEQQheZQhKwVz8CTcUS-apS0ZY20dB3x6Pqu8O&lib=MQCTb8z4whP1hBg8G4ndPKSeX61n9NMurc");
+      const res = await fetch("https://script.google.com/macros/s/AKfycbwUAkhb8vDKfjMFAjfzYWNj_R_lINxrP1WimI5Y6V38MaSc6FWaqIBbRBmGhX55c-5D7w/exec");
       const all = await res.json();
 
       const selected = giftSelector.value;
