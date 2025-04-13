@@ -107,8 +107,8 @@
 
       const selected = giftSelector.value;
       names = all
-        .filter(n => n.Selectedgifts === selected && !winners[selected].includes(n.Name))
-        .flatMap(n => Array(n.multiple).fill(n.Name));
+        .filter(n => n.Selectedgifts === selected && !winners[selected].includes(n.name))
+        .flatMap(n => Array(n.multiple).fill(n.name));
 
       drawWheel();
     }
