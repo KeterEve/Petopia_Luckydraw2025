@@ -87,7 +87,7 @@
     let names = [];
 
     async function fetchNames() {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbxJsIzdgxiXWO6E6YPtfxZNEpZGKagjtP3lW2Rtx6-x6OkAMIb_SLWaGw-7X4x2Cuijvg/exec"); // 等你部署後填返API URL
+      const res = await fetch("https://script.google.com/macros/s/AKfycbyrV3cUX6giG1R2yErDGATxWRPdjLMoDtFAgLkDfDU1pHxLVBGmjhzrKV8qkL5TqN9R/exec");
       names = await res.json();
       drawWheel();
     }
