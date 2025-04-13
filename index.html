@@ -87,7 +87,7 @@
     let names = [];
 
     async function fetchNames() {
-      const res = await fetch("https://script.google.com/a/macros/petopia-official.com/s/AKfycbz7PhS2g7eu8s0payoUaD-UFO6YB0ImBdE7LuSFcmOSvBFTIgYC0ivO_f4JWBK0C_7W/exec");
+      const res = await fetch("https://script.google.com/macros/s/AKfycbxJsIzdgxiXWO6E6YPtfxZNEpZGKagjtP3lW2Rtx6-x6OkAMIb_SLWaGw-7X4x2Cuijvg/exec"); // 等你部署後填返API URL
       names = await res.json();
       drawWheel();
     }
