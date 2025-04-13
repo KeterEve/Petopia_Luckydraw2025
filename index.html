@@ -20,6 +20,13 @@
     h1 {
       color: #fff;
       text-shadow: 2px 2px 8px #000;
+      margin-top: 0.5em;
+    }
+    select {
+      font-size: 1.2rem;
+      padding: 5px;
+      margin: 10px;
+      border-radius: 8px;
     }
     #wheel {
       width: 400px;
@@ -52,9 +59,9 @@
       left: calc(50% - 20px);
     }
     #spin {
-      margin-top: 40px;
+      margin-top: 20px;
       font-size: 2rem;
-      background: #fff;
+      background: #ffb6b9;
       padding: 10px 30px;
       border-radius: 12px;
       border: none;
@@ -70,7 +77,12 @@
   </style>
 </head>
 <body>
-  <h1>Petopia 幻想動物轉盤</h1>
+  <h1>🎉 PETOPIA 1000 FOLLOWERS 達成 - LUCKY DRAW 2025 🎁</h1>
+  <select id="giftSelector">
+    <option value="Gift1">🎁 Gift1</option>
+    <option value="Gift2">🎁 Gift2</option>
+    <option value="Gift3">🎁 Gift3</option>
+  </select>
   <div id="wheel-container" style="position: relative;">
     <div class="pointer"></div>
     <canvas id="wheel" width="400" height="400"></canvas>
@@ -83,12 +95,19 @@
     const ctx = canvas.getContext("2d");
     const spinBtn = document.getElementById("spin");
     const resultEl = document.getElementById("result");
+    const giftSelector = document.getElementById("giftSelector");
 
     let names = [];
+    let winners = { Gift1: [], Gift2: [], Gift3: [] };
+    let winnersPerGift = { Gift1: 1, Gift2: 1, Gift3: 3 };
 
     async function fetchNames() {
       const res = await fetch("https://script.google.com/macros/s/AKfycbxJsIzdgxiXWO6E6YPtfxZNEpZGKagjtP3lW2Rtx6-x6OkAMIb_SLWaGw-7X4x2Cuijvg/exec");
-      names = await res.json();
+      const all = await res.json();
+
+      const selected = giftSelector.value;
+      names = all.filter(n => n.gift === selected && !winners[selected].includes(n.name)).flatMap(n => Array(n.multiple).fill(n.name));
+
       drawWheel();
     }
 
@@ -115,6 +134,12 @@
     }
 
     function spinWheel() {
+      const selected = giftSelector.value;
+      if (winners[selected].length >= winnersPerGift[selected]) {
+        resultEl.innerHTML = `✅ <b>${selected}</b> 抽獎已完成！`;
+        return;
+      }
+
       const total = names.length;
       const slice = 2 * Math.PI / total;
       const rand = Math.floor(Math.random() * total);
@@ -124,7 +149,10 @@
       canvas.style.transform = `rotate(${angle}rad)`;
 
       setTimeout(() => {
-        resultEl.textContent = `🎉 中獎者：${names[rand]}！`;
+        const winner = names[rand];
+        winners[selected].push(winner);
+        resultEl.innerHTML = `🎉 中獎者：<b>${winner}</b>（${selected}）！`;
+        fetchNames();
       }, 5000);
     }
 
@@ -134,6 +162,7 @@
       setTimeout(spinWheel, 100);
     });
 
+    giftSelector.addEventListener("change", fetchNames);
     fetchNames();
   </script>
 </body>
