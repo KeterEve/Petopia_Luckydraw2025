@@ -82,7 +82,7 @@
 <body>
   <h1>🎉 PETOPIA 1000 FOLLOWERS 達成 - LUCKY DRAW 2025 🎁</h1>
   <select id="giftSelector">
-    <option value="Gift1">🎁 Gift1</option>
+    <option value="Round1_Strawberry">🎁 Round1_Strawberry</option>
     <option value="Gift2">🎁 Gift2</option>
     <option value="Gift3">🎁 Gift3</option>
   </select>
@@ -101,8 +101,8 @@
     const giftSelector = document.getElementById("giftSelector");
 
     let names = [];
-    let winners = { Gift1: [], Gift2: [], Gift3: [] };
-    let winnersPerGift = { Gift1: 1, Gift2: 1, Gift3: 3 };
+    let winners = { Round1_Strawberry: [], Gift2: [], Gift3: [] };
+    let winnersPerGift = { Round1_Strawberry: 1, Gift2: 1, Gift3: 3 };
 
     async function fetchNames() {
       const res = await fetch("https://script.google.com/macros/s/AKfycbwUAkhb8vDKfjMFAjfzYWNj_R_lINxrP1WimI5Y6V38MaSc6FWaqIBbRBmGhX55c-5D7w/exec");
