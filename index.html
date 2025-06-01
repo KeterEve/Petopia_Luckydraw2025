@@ -105,7 +105,7 @@
     let winnersPerGift = { Round1_Strawberry: 1, Gift2: 1, Gift3: 3 };
 
     async function fetchNames() {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbwUAkhb8vDKfjMFAjfzYWNj_R_lINxrP1WimI5Y6V38MaSc6FWaqIBbRBmGhX55c-5D7w/exec");
+      const res = await fetch("https://script.google.com/macros/s/AKfycbw6JtHllSRqbV1coheU9mXdk7LELEczzxTIjJeH1sNa6fhwxRq86Mc6GOMsTsja1ttiSQ/exec");
       const all = await res.json();
 
       const selected = giftSelector.value;
